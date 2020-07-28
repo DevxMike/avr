@@ -14,6 +14,12 @@
 #define PORT_D5 D
 #define D4 0
 #define PORT_D4 B
+#define PORT(x) SPORT(x)
+#define SPORT(x) (PORT##x)
+#define DDR(x) SDDR(x)
+#define SDDR(x) (DDR##x)
+#define PIN(x) SPIN(x)
+#define SPIN(x) (PIN##x)
 
 void init_display(void); //init I/O ports 
 void set_to_output(void); //set data ports to output
