@@ -6,7 +6,15 @@
 
 int main(void){
     init_display();
-    write_string("HELLO :)");
+
+    write_instruction(DISP_CTRL & BLINK_OFF & CURSOR_OFF);
+    write_string("first");
+    locate(10, 1);
+    write_string("second");
+    locate(0, 1);
+    write_string("third");
+    locate(10, 0);
+    write_string("fourth");
     while(1){
 
     }
