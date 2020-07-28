@@ -24,5 +24,25 @@
 void init_display(void); //init I/O ports 
 void set_to_output(void); //set data ports to output
 void set_to_input(void); //set data ports to input
+void write_byte(uint8_t); //writes 1 byte of data 
+void write_half(uint8_t); //writes half of byte
 
+inline void set_rs(void){
+    PORT(PORT_RS) |= (1 << RS);
+}
+inline void set_rw(void){
+    PORT(PORT_RW) |= (1 << RW);
+}
+inline void set_e(void){
+    PORT(PORT_E) |= (1 << E);
+}
+inline void clear_rs(void){
+    PORT(PORT_RS) &= ~(1 << RS);
+}
+inline void clear_rw(void){
+    PORT(PORT_RW) &= ~(1 << RW);
+}
+inline void clear_e(void){
+    PORT(PORT_E) &= ~(1 << E);
+}
 #endif
