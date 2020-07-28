@@ -5,6 +5,8 @@
 
 
 int main(void){
+    init_display();
+    write_string("HELLO :)");
     while(1){
 
     }

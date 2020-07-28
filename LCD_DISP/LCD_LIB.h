@@ -26,6 +26,13 @@ void set_to_output(void); //set data ports to output
 void set_to_input(void); //set data ports to input
 void write_byte(uint8_t); //writes 1 byte of data 
 void write_half(uint8_t); //writes half of byte
+void write_data_byte(char); //writes user`s data
+void write_instruction(uint8_t); //writes instruction
+uint8_t read_byte(void); //read data
+uint8_t read_half(void); //read half of byte
+void write_string(char*); //write string to the display
+uint8_t busy_flag(void); //read busy flag val
+uint8_t read_data(void); //read data
 
 inline void set_rs(void){
     PORT(PORT_RS) |= (1 << RS);
@@ -45,4 +52,5 @@ inline void clear_rw(void){
 inline void clear_e(void){
     PORT(PORT_E) &= ~(1 << E);
 }
+
 #endif
