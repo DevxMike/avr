@@ -137,7 +137,8 @@ void write_string(char* string){
     }
 }
 void locate(uint8_t x, uint8_t y){ //y = 0 first line, y = 1 second line
-    uint8_t location = 0x00;
-    location |= LOCATION_DDRAM | x | (y * SECOND_LINE);
-    write_instruction(location);
+    uint8_t location = 0x00; //primary location is 0x00 (beginning)
+    location |= LOCATION_DDRAM | x | (y * SECOND_LINE); //sum location DDRAM first address (0x80) 
+                                                        //with x coord and y multiplied by second line address (0x40)
+    write_instruction(location); //send instruction
 }
