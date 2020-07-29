@@ -1,6 +1,6 @@
 I`m creating some libraries helpful to use while programming AVR uC.
 At work:
--LCD_DISP
+-
 
 Already done:
--none yet
+-LCD_DISP (lib for hd44780)
