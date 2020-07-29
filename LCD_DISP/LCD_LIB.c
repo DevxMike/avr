@@ -28,7 +28,7 @@ void init_display(void){
     clear_e();
     _delay_us(100); //wait
     write_instruction(CLEAR_DISP); //clear display
-    demo();
+    //demo();
 }
 void set_to_output(void){
     DDR(PORT_D4) |= (1 << D4); //set D4 pin to output
@@ -157,4 +157,13 @@ void demo(void){
     write_string("07.20");
     locate_ddram(5, 1);
     write_string("(C)DevxMike");
+}
+void write_to_cgram(uint8_t cgram_address, const uint8_t* tab, uint8_t y){
+    uint8_t temp;
+
+    for(temp = 0x00; temp < y; ++temp){
+        locate_cgram(cgram_address++); //locate address for row of data
+        write_data_byte(*tab++); //write the data into cgram
+    }
+    locate_ddram(0, 0);
 }

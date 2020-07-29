@@ -50,9 +50,10 @@ uint8_t read_half(void); //read half of byte
 void write_string(char*); //write string to the display
 uint8_t busy_flag(void); //read busy flag val
 uint8_t read_data(void); //read data
-void locate_ddram(uint8_t x, uint8_t y); //set location in ddram
-void locate_cgram(uint8_t offset); //set location in cgram
+void locate_ddram(uint8_t, uint8_t); //set location in ddram
+void locate_cgram(uint8_t); //set location in cgram
 void demo(void);
+void write_to_cgram(uint8_t,const uint8_t*, uint8_t); //write your own char pattern to cgram
 
 inline void set_rs(void){
     PORT(PORT_RS) |= (1 << RS);
