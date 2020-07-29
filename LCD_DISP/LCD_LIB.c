@@ -28,6 +28,7 @@ void init_display(void){
     clear_e();
     _delay_us(100); //wait
     write_instruction(CLEAR_DISP); //clear display
+    demo();
 }
 void set_to_output(void){
     DDR(PORT_D4) |= (1 << D4); //set D4 pin to output
@@ -136,9 +137,24 @@ void write_string(char* string){
         write_data_byte(*string++); //write byte of data to LCD
     }
 }
-void locate(uint8_t x, uint8_t y){ //y = 0 first line, y = 1 second line
+void locate_ddram(uint8_t x, uint8_t y){ //y = 0 first line, y = 1 second line
     uint8_t location = 0x00; //primary location is 0x00 (beginning)
     location |= LOCATION_DDRAM | x | (y * SECOND_LINE); //sum location DDRAM first address (0x80) 
                                                         //with x coord and y multiplied by second line address (0x40)
-    write_instruction(location); //send instruction
+    write_instruction(location); //send ddram address
+}
+void locate_cgram(uint8_t offset){
+    uint8_t temp = 0x00;
+
+    offset &= ~(0x80); //lets make sure user is sending the right address
+    temp |= offset;
+    write_instruction(temp); //send cgram address
+}
+void demo(void){
+    locate_ddram(2, 0);
+    write_string("Hello World!");
+    locate_ddram(0, 1);
+    write_string("07.20");
+    locate_ddram(5, 1);
+    write_string("(C)DevxMike");
 }
