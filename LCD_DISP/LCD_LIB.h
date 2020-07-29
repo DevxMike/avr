@@ -52,6 +52,7 @@ uint8_t busy_flag(void); //read busy flag val
 uint8_t read_data(void); //read data
 void locate_ddram(uint8_t x, uint8_t y); //set location in ddram
 void locate_cgram(uint8_t offset); //set location in cgram
+void demo(void);
 
 inline void set_rs(void){
     PORT(PORT_RS) |= (1 << RS);
@@ -71,6 +72,4 @@ inline void clear_rw(void){
 inline void clear_e(void){
     PORT(PORT_E) &= ~(1 << E);
 }
-void demo(void);
-
 #endif

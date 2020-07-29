@@ -144,10 +144,10 @@ void locate_ddram(uint8_t x, uint8_t y){ //y = 0 first line, y = 1 second line
     write_instruction(location); //send ddram address
 }
 void locate_cgram(uint8_t offset){
-    uint8_t temp = 0x00;
+    uint8_t temp = LOCATION_CGRAM;
 
     offset &= ~(0x80); //lets make sure user is sending the right address
-    temp |= offset;
+    temp |= offset; //sum location CGRAM first address (0x40) with offset
     write_instruction(temp); //send cgram address
 }
 void demo(void){
