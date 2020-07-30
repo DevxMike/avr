@@ -32,6 +32,6 @@ ISR(TIMER2_COMP_vect){
     PORT(PORT_DIG) &= 0xF0; //multiply by 0xF0 so we are not changing the values that segments are not connected with and at the same time, we are setting 
                             //all dig`s to 0 so none of `em is active
     PORT(PORT_DIG) |= seg; //set segment to 1
-    seg = seg << 1; //shift seg to the right by one place (multiply by 2)
+    seg = seg << 1; //shift seg to the left by one place (multiply by 2)
     if(seg > 8) seg = 0x01; //if seg > 8 that means it has reached place after the last pin that the digit is attached to so start again from 0x01
 }
