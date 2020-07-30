@@ -2,8 +2,8 @@
 #define LED_DISP_h_
 #include <avr/io.h>
 #define PORT(x) SPORT(x) //those macros let us use some
-#define SPORT(x) (PORT##x) //convenient stuff like i.e. PORT(PORT_RS) |= (1 << RS) 
-#define DDR(x) SDDR(x) //instead of PORTx |= (1 << RS)
+#define SPORT(x) (PORT##x) //convenient stuff like i.e. PORT(PORT_DIG1) |= (1 << DIG1) 
+#define DDR(x) SDDR(x) //instead of PORTx |= (1 << y)
 #define SDDR(x) (DDR##x)
 #define PIN(x) SPIN(x)
 #define SPIN(x) (PIN##x)
@@ -34,9 +34,16 @@
 #define G_PIN  1
 #define PORT_G_PIN  B
 
-void init_led(void);
-void set_output(void);
-void demo(void);
+typedef struct{ //led display info
+    uint8_t first;
+    uint8_t second;
+    uint8_t third;
+    uint8_t fourth;
+}led_display_t;
+
+void init_led(led_display_t*); //initialize led display
+void set_output(void); //set outputs
+void set_demo(led_display_t*); //set initial value to be displayed
 
 inline void set_a(void){ //helpful inline functions to set or clear output (set 1 or 0)
     PORT(PORT_A_PIN) |= (1 << A_PIN);
