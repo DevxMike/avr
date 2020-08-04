@@ -7,6 +7,8 @@ void init_spi_MASTER(void){
     SPCR |= (1 << MSTR) | (1 << SPE); //master mode, SPI enable
     SPSR |= (1 << SPI2X); //fosc / 8
     SPCR|= (1 << SPR0);
+
+    set_OE(); //output disabled
 }
 void send_data(const uint8_t data){
     SPDR = data; //write data byte to SPDR register to start transfer
