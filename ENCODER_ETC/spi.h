@@ -6,14 +6,7 @@
 #define PORT_MOSI B
 #define SS 2
 #define PORT_SS B
-#include <avr/io.h>
-
-#define PORT(x) SPORT(x) //those macros let us use some
-#define SPORT(x) (PORT##x) //convenient stuff like i.e. PORT(PORT_DIG1) |= (1 << DIG1) 
-#define DDR(x) SDDR(x) //instead of PORTx |= (1 << y)
-#define SDDR(x) (DDR##x)
-#define PIN(x) SPIN(x)
-#define SPIN(x) (PIN##x)
+#include "common_macros.h"
 
 void init_spi_MASTER(void);
 void send_data(const uint8_t);

@@ -1,7 +1,5 @@
-#include <avr/io.h>
 #include <util/delay.h>
 #include "LCD_LIB.h"
-#include <util/delay.h>
 #include "shift_register.h"
 
 

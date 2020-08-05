@@ -1,21 +1,13 @@
-#include <stdbool.h>
+#include "common_macros.h"
 
 #ifndef LCD_LIB_h_
 #define LCD_LIB_h_
 
 #define RS 0 //RS is pin no. 0
 #define PORT_RS D //on PORTD
-#define RW 1 //and so on
-#define PORT_RW D
-#define E 2
+#define E 1
 #define PORT_E D
 #define PORT_D4 B
-#define PORT(x) SPORT(x) //those macros let us use some
-#define SPORT(x) (PORT##x) //convenient stuff like i.e. PORT(PORT_RS) |= (1 << RS) 
-#define DDR(x) SDDR(x) //instead of PORTx |= (1 << RS)
-#define SDDR(x) (DDR##x)
-#define PIN(x) SPIN(x)
-#define SPIN(x) (PIN##x)
 
 
 #define CLEAR_DISP 0x01 //clear display command

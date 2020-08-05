@@ -4,6 +4,7 @@
 #include <avr/interrupt.h>
 #include "shift_register.h"
 #include "LCD_LIB.h"
+#include "encoder.h"
 
 uint8_t states[] = {
     0xC0, 0xF9, 0xA4, 0xB0, 0x99, 0x92, 0x82, 0xF8, 0x80, 0x90 //values that are going to be written to PORT_KATHODE reg to set 0 on certain pins
@@ -42,10 +43,22 @@ int main(void){
     locate_ddram(3, 0);
     write_string("Bazan Micha");
     write_data_byte(l_line);
-    locate_ddram(3, 1);
-    write_string("29.07.2020");
+
     while(1){
-        
+        locate_ddram(0, 1);
+        write_string("STATES: ");
+        write_string("A:");
+        if(PIN(PORT_EN_A) & (1 << EN_A)){
+            write_string("1, B:");
+        }else{
+            write_string("0, B:");
+        }
+        if(PIN(PORT_EN_B) & (1 << EN_B)){
+            write_string("1");
+        }else{
+            write_string("0");
+        }
+        _delay_us(100);
     }
     return 0;
 }

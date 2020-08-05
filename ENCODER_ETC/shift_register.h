@@ -2,6 +2,7 @@
 #define shift_register_h
 #define LATCH 1
 #define PORT_LATCH B
+#include "common_macros.h"
 #include "spi.h"
 
 void init_register(void);
