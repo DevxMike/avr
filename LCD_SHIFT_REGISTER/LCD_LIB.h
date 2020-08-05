@@ -30,6 +30,11 @@
 #define LOCATION_DDRAM 0x80 //DDRAM (display data ram) first element location
 #define SECOND_LINE 0x40 //address of the display`s second line
 #define LOCATION_CGRAM 0x40 //CGRAM (character generator ram) first element location
+#define FUNCTION_SET 0x3F //DL = 8bit,  N = 2lines, F = 5 x 10 dots
+    #define DL_MASK 0xEF //4bit interface
+    #define N_MASK 0xF7 //1 line
+    #define F_MASK 0xFB //5x8dots
+
 
 void init_display(void); //init I/O ports 
 void write_byte(uint8_t); //writes 1 byte of data 

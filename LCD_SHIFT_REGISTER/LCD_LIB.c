@@ -20,6 +20,8 @@ void init_display(void){
     write_byte(0x30); //send command function enable
     _delay_us(100); //wait
     write_instruction(CLEAR_DISP); //clear display
+    _delay_us(100); //wait
+    write_instruction(FUNCTION_SET & F_MASK);
 }
 
 void write_byte(uint8_t data){
@@ -27,7 +29,7 @@ void write_byte(uint8_t data){
     set_e(); //set enable
     send_byte_to_reg(data);
     clear_e(); //clear enable
-    _delay_ms(1);
+    _delay_us(100);
 }
 
 void write_data_byte(char byte){
