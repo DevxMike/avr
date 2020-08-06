@@ -36,32 +36,17 @@ int main(void){
         b = (PIND & (1 << EN_B)) ? 1 : 0;
 
         _delay_us(10);
-        if(!(ENC_STATE & IDLE_MASK)){
-            if(ENC_STATE & INCREASE_MASK){
-                ENC_STATE &= ~(INCREASE_MASK);
-                ENC_STATE |= IDLE_MASK;
-                //do something else
-            }
-            else{
-                ENC_STATE &= ~(DECREASE_MASK);
-                ENC_STATE |= IDLE_MASK;
-                //do something else
-            }
-            locate_ddram(0xA, 1);
-            write_data_byte(a + '0');
-            locate_ddram(0xF, 1);
-            write_data_byte(b + '0');
-        }
+        locate_ddram(0xA, 1);
+        write_data_byte(a + '0');
+        locate_ddram(0xF, 1);
+        write_data_byte(b + '0');
     }
     return 0;
 }
 
 ISR(INT0_vect){
-    ENC_STATE &= ~IDLE_MASK;
-    ENC_STATE |= INCREASE_MASK;
+
 }
 ISR(INT1_vect){
-    ENC_STATE &= ~IDLE_MASK;
-    ENC_STATE |= DECREASE_MASK;
 
 }
