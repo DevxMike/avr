@@ -6,7 +6,6 @@
 #include "LCD_LIB.h"
 #include "encoder.h"
 
-
 uint8_t a, b;
 
 int main(void){
