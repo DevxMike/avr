@@ -29,10 +29,11 @@ enum ddram_custom_addresses {
 
 int main(void){
     uint8_t temp;
-
+    uint8_t a = 0, b = 0;
     init_spi_MASTER(); //initialize SPI
     init_register(); //initialize register
     init_display(); //initialize display
+    //init_encoder();
     write_instruction(DISP_CTRL & BLINK_OFF & CURSOR_OFF); //turn on the display
     
     for(temp = 0x00; temp < 0x05; ++temp){ //write custom chars into cgram
@@ -43,22 +44,18 @@ int main(void){
     locate_ddram(3, 0);
     write_string("Bazan Micha");
     write_data_byte(l_line);
+    locate_ddram(0, 1);
+    write_string("STATES: A: , B: ");
 
     while(1){
-        locate_ddram(0, 1);
-        write_string("STATES: ");
-        write_string("A:");
-        if(PIN(PORT_EN_A) & (1 << EN_A)){
-            write_string("1, B:");
-        }else{
-            write_string("0, B:");
-        }
-        if(PIN(PORT_EN_B) & (1 << EN_B)){
-            write_string("1");
-        }else{
-            write_string("0");
-        }
-        _delay_us(100);
+        
+        a = (PIN(PORT_EN_A) & (1 << EN_A)) ? 1 : 0;
+        b = (PIN(PORT_EN_B) & (1 << EN_B)) ? 1 : 0;
+        locate_ddram(0xA, 1);
+        write_data_byte(a + '0');
+        locate_ddram(0xF, 1);
+        write_data_byte(b + '0');
+        _delay_us(10);
     }
     return 0;
 }

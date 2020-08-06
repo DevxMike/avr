@@ -6,5 +6,5 @@
 #define EN_B 3
 #define PORT_EN_B D
 
-
+void init_encoder(void);
 #endif

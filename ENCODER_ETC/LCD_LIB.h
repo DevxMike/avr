@@ -7,7 +7,6 @@
 #define PORT_RS D //on PORTD
 #define E 1
 #define PORT_E D
-#define PORT_D4 B
 
 
 #define CLEAR_DISP 0x01 //clear display command
