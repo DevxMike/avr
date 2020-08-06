@@ -29,7 +29,7 @@ enum ddram_custom_addresses {
 };
 int main(void){
     uint8_t temp;
-    //uint8_t a = 0, b = 0;
+    uint8_t a = 0, b = 0;
     init_spi_MASTER(); //initialize SPI
     init_register(); //initialize register
     init_display(); //initialize display
@@ -50,22 +50,21 @@ int main(void){
 
     while(1){
         
-        /*a = (PIN(PORT_EN_A) & (1 << EN_A)) ? 1 : 0;
+        a = (PIN(PORT_EN_A) & (1 << EN_A)) ? 1 : 0;
         b = (PIN(PORT_EN_B) & (1 << EN_B)) ? 1 : 0;
         locate_ddram(0xA, 1);
         write_data_byte(a + '0');
         locate_ddram(0xF, 1);
         write_data_byte(b + '0');
-        _delay_us(10);*/    
-        locate_ddram(0, 1);
+        _delay_us(10);
     }
     return 0;
 }
 
 ISR(INT0_vect){
-    write_string("int0");
+    //write_string("int0");
 }
 ISR(INT1_vect){
-    write_string("int1");
+    //write_string("int1");
 
 }
