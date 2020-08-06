@@ -6,6 +6,7 @@
 #include "LCD_LIB.h"
 #include "encoder.h"
 
+
 uint8_t states[] = {
     0xC0, 0xF9, 0xA4, 0xB0, 0x99, 0x92, 0x82, 0xF8, 0x80, 0x90 //values that are going to be written to PORT_KATHODE reg to set 0 on certain pins
 };
@@ -26,16 +27,16 @@ const uint8_t cg_ram_addresses[] = {
 enum ddram_custom_addresses {
     o_dash = 0x00, z_dot = 0x01, z_line = 0x02, l_line = 0x04, cpyright = 0x06
 };
-
 int main(void){
     uint8_t temp;
-    uint8_t a = 0, b = 0;
+    //uint8_t a = 0, b = 0;
     init_spi_MASTER(); //initialize SPI
     init_register(); //initialize register
     init_display(); //initialize display
-    //init_encoder();
+    init_encoder();
     write_instruction(DISP_CTRL & BLINK_OFF & CURSOR_OFF); //turn on the display
-    
+    sei();
+
     for(temp = 0x00; temp < 0x05; ++temp){ //write custom chars into cgram
         write_to_cgram(cg_ram_addresses[temp], custom_chars[temp], 8);
     }
@@ -44,23 +45,27 @@ int main(void){
     locate_ddram(3, 0);
     write_string("Bazan Micha");
     write_data_byte(l_line);
-    locate_ddram(0, 1);
-    write_string("STATES: A: , B: ");
+    //locate_ddram(0, 1);
+    //write_string("STATES: A: , B: ");
 
     while(1){
         
-        a = (PIN(PORT_EN_A) & (1 << EN_A)) ? 1 : 0;
+        /*a = (PIN(PORT_EN_A) & (1 << EN_A)) ? 1 : 0;
         b = (PIN(PORT_EN_B) & (1 << EN_B)) ? 1 : 0;
         locate_ddram(0xA, 1);
         write_data_byte(a + '0');
         locate_ddram(0xF, 1);
         write_data_byte(b + '0');
-        _delay_us(10);
+        _delay_us(10);*/    
+        locate_ddram(0, 1);
     }
     return 0;
 }
 
-/*
-ISR(TIMER2_COMP_vect){
+ISR(INT0_vect){
+    write_string("int0");
 }
-*/
+ISR(INT1_vect){
+    write_string("int1");
+
+}

@@ -6,6 +6,7 @@
 #include "spi.h"
 
 void init_register(void);
+void init_enc_int(void);
 inline void set_latch(void){ //set latch
     PORT(PORT_LATCH) |= (1 << LATCH);
 }
