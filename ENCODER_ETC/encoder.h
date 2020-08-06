@@ -2,9 +2,9 @@
 #define encoder_h_
 #include "common_macros.h"
 #define EN_A 2
-#define PORT_EN_A D
+#define PORT_EN D
 #define EN_B 3
-#define PORT_EN_B D
-
+extern const uint8_t enc_states[];
 void init_encoder(void);
+void init_enc_int(void);
 #endif

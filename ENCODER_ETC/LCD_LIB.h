@@ -3,11 +3,14 @@
 #ifndef LCD_LIB_h_
 #define LCD_LIB_h_
 
-#define RS 0 //RS is pin no. 0
+#define RS 7 //RS is pin no. 0
 #define PORT_RS D //on PORTD
-#define E 1
-#define PORT_E D
+#define E 0
+#define PORT_E B
 
+extern const uint8_t custom_chars[][8];
+extern const uint8_t cg_ram_addresses[];
+extern const uint8_t ddram_custom_addresses[];
 
 #define CLEAR_DISP 0x01 //clear display command
 #define HOME 0x02 //return home command
