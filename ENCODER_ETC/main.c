@@ -34,23 +34,34 @@ int main(void){
     while(1){
         a = (PIND & (1 << EN_A)) ? 1 : 0;
         b = (PIND & (1 << EN_B)) ? 1 : 0;
-        
-        locate_ddram(0xA, 1);
-        write_data_byte(a + '0');
-        locate_ddram(0xF, 1);
-        write_data_byte(b + '0');
 
         _delay_us(10);
+        if(!(ENC_STATE & IDLE_MASK)){
+            if(ENC_STATE & INCREASE_MASK){
+                ENC_STATE &= ~(INCREASE_MASK);
+                ENC_STATE |= IDLE_MASK;
+                //do something else
+            }
+            else{
+                ENC_STATE &= ~(DECREASE_MASK);
+                ENC_STATE |= IDLE_MASK;
+                //do something else
+            }
+            locate_ddram(0xA, 1);
+            write_data_byte(a + '0');
+            locate_ddram(0xF, 1);
+            write_data_byte(b + '0');
+        }
     }
     return 0;
 }
 
 ISR(INT0_vect){
-    /*a = (PIN(PORT_EN_A) & (1 << EN_A)) ? 1 : 0;
-    b = (PIN(PORT_EN_B) & (1 << EN_B)) ? 1 : 0;*/
-    //write_string("int0");
+    ENC_STATE &= ~IDLE_MASK;
+    ENC_STATE |= INCREASE_MASK;
 }
 ISR(INT1_vect){
-    //write_string("int1");
+    ENC_STATE &= ~IDLE_MASK;
+    ENC_STATE |= DECREASE_MASK;
 
 }
